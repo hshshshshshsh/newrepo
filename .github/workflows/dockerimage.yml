@@ -1,0 +1,20 @@
+name: Docker Image.CI
+on:
+  push:
+      branches: [ master ]
+  pull_request:
+      branches: [ master ]
+jobs:
+  push_to_registries:
+     name: Push Docker images to multiple registries 
+     run-on: ubuntu-latest
+     steps:
+       - name: check out the repo
+         uses: actions/checkout@v2
+       - name: Build and Publish head Docker image
+         uses: VaultVulp/gp-docker-action@1.1.7
+         with:
+           github-token: ${{ secrets.Token }} 
+           image-name: mypage
+           image-tag: head
+             
